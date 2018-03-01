@@ -1,0 +1,19 @@
+App\Domain\Hexahedron\Model\Cube:
+    type: entity
+    table: cube
+    repositoryClass: App\Infrastructure\Doctrine\Hexahedron\Repository\CubeRepository
+    id:
+      id:
+        type: string
+        nullable: false
+
+    fields:
+      edge:
+        type: integer
+        nullable: false
+      location:
+        type: string
+        length: 100
+        nullable: false
+
+    lifecycleCallbacks: {  }

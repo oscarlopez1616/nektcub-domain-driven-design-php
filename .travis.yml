@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 7.2.0
+
+before_install:
+  - composer self-update
+
+install:
+  - composer install --prefer-dist --no-interaction
+  - ./vendor/bin/simple-phpunit install
+
+script:
+  - composer validate --strict
+  - ./vendor/bin/simple-phpunit

@@ -1,0 +1,41 @@
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+
+    # Controllers
+    App\UI\Http\Rest\Hexahedron\Controller\CubeController:
+        class: App\UI\Http\Rest\Hexahedron\Controller\CubeController
+        arguments:
+            - '@tactician.commandbus'
+
+    #Repository
+    App\Infrastructure\Doctrine\Hexahedron\Repository\CubeRepository:
+    #alias for autowiring MessageServiceInterface
+    App\Domain\Hexahedron\Repository\CubeRepositoryInterface: '@App\Infrastructure\Doctrine\Hexahedron\Repository\CubeRepository'
+
+    # Apllications handlers
+    app.create_cube_handler:
+        class:   App\Application\UseCase\Hexahedron\CreateCubeHandler
+        tags:
+            - { name: tactician.handler, command: App\Application\UseCase\Hexahedron\CreateCubeRequest }
+
+    # Applications Services
+    App\Application\UseCase\Hexahedron\CalculateVolumeIntersectionCubesService:
+        class: App\Application\UseCase\Hexahedron\CalculateVolumeIntersectionCubesService
+    # Cube Symfony Console Commands
+    App\UI\Cli\Console\Hexahedron\CreateCubeSymfonyCommand:
+        class:   App\UI\Cli\Console\Hexahedron\CreateCubeSymfonyCommand
+        public: true
+        arguments:
+            - '@tactician.commandbus'
+        tags: [console.command]

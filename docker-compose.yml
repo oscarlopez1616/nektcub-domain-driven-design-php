@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+    php:
+        container_name: container_php
+        build:
+            context: ./etc/docker/php7-fpm
+        volumes:
+            - ./:/var/www/nektcub
+    nginx:
+        container_name: container_nginx
+        build:
+            context: ./etc/docker/nginx
+        ports:
+            - "80:80"
+        volumes_from:
+            - php
+        volumes:
+            - ./etc/docker/nginx/logs:/var/log/nginx

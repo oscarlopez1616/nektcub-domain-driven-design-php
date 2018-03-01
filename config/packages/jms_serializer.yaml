@@ -1,0 +1,10 @@
+jms_serializer:
+    visitors:
+        xml:
+            format_output: '%kernel.debug%'
+    metadata:
+        auto_detection: false
+        directories:
+            hexahedron:
+                namespace_prefix: "App\\Domain\\Hexahedron\\Model"
+                path: "%kernel.root_dir%/Infrastructure/JMSSerializer/Hexahedron/Annotation"

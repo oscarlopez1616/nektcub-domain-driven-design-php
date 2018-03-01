@@ -1,0 +1,10 @@
+App\Domain\Hexahedron\Model\VolumeVO:
+    exclusion_policy: ALL
+    properties:
+        meassure:
+            expose: true
+            serialized_name: meassure
+    virtual_properties:
+        getUnit:
+            expose: true
+            serialized_name: unit

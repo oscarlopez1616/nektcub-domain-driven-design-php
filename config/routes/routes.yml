@@ -1,0 +1,4 @@
+cube:
+    type: rest
+    prefix: /api
+    resource: App\UI\Http\Rest\Hexahedron\Controller\CubeController
