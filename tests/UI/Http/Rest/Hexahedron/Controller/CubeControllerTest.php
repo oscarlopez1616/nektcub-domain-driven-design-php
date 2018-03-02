@@ -8,6 +8,7 @@ class CubeControllerTest extends WebTestCase
 {
 
     /**
+     * @covers \App\UI\Http\Rest\Hexahedron\Controller\CubeController::getVolumeAction
      * @dataProvider dataProvider
      */
     public function testGetVolumeAction($uri, $expectedCode, $expectedJson)
